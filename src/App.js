@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles/App.css';
+import CardGrid from './components/CardGrid'; 
 
 function App() {
+
+  const [score,setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+  const handleScoreCHange  = (card) =>{
+    setScore(prevScore => prevScore +1 );
+
+    if(score+1>bestScore){
+      setBestScore(score+1);
+    }
+  };
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className='App-header'>
+        <h1>Gif Memory Game</h1>
+        
+        <div>
+          <p>Current Score : {score}</p>
+
+          <p>Best Score : {bestScore}</p>          
+        </div>
+    </header>
+
+    <CardGrid onScoreChange = {handleScoreCHange} />
     </div>
   );
 }

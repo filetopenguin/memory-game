@@ -29,20 +29,19 @@ const CardGrid = ({ onScoreChange }) => {
         shuffleCards(cards);
     };
 
-    return(
-        <div className='card-grid'>
-            {shuffledCards.map((card,index)=>{
+    return (
+        <div className="card-grid">
+            {shuffledCards.map((card, index) => (
                 <Card
                     key={index}
                     name={card.title}
-                    image = {card.images.fixed_height.url}
-                    onClick={()=>handleCardClick(card)}
-                    />
-                })}
-        
-
+                    image={card.images.fixed_height.url}
+                    onClick={() => handleCardClick(card)}
+                />
+            ))}
         </div>
-    )
-}
+    );
 
-export default CardGrid
+};
+
+export default CardGrid;
