@@ -1,6 +1,9 @@
-const API_KEY = process.env.REACT_APP_API_KEY;
-const GIPHY_URL = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=12`;
+const apiKey = process.env.REACT_APP_API_KEY;
+const searchTerm = 'Bibi Netanyahu';
+const GIPHY_URL = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=&${encodeURIComponent(searchTerm)}&limit=12`;
 
+
+console.log("API Key:", process.env.REACT_APP_API_KEY);
 
 export const fetchGiphyData = async() => {
     try{
