@@ -3,15 +3,17 @@ import Card from './Card';
 import { fetchGiphyData } from '../services/apiService';
 
 
-const CardGrid = ({ onScoreChange }) => {
+const CardGrid = ({ onScoreChange, resetScore }) => {
     const [cards, setCards ] = useState([]);
-    const [shuffledCards, setShuffledCards] = useState([])
+    const [shuffledCards, setShuffledCards] = useState([]);
+    const [clickedCards, setClickedCards] = useState([]);
+
 
     useEffect(() => {
         const getData = async () => {
           const data = await fetchGiphyData();
           setCards(data);
-          shuffleCards(data);  // Shuffle the cards once the data is fetched
+          shuffleCards(data); 
         };
         getData();
       }, []); 
@@ -25,7 +27,16 @@ const CardGrid = ({ onScoreChange }) => {
 
 
     const handleCardClick = (card) => {
-        onScoreChange(card);
+        if(clickedCards.includes(card.id)) {
+            resetScore();
+            setClickedCards([]);
+        }    
+        else {
+            onScoreChange(card);
+            setClickedCards((prevClickedCards) => [...prevClickedCards, card.id]); 
+
+        }
+       
         shuffleCards(cards);
     };
 
